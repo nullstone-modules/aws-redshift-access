@@ -7,9 +7,3 @@ EOF
   type    = map(string)
   default = {}
 }
-
-variable "database_name" {
-  type        = string
-  description = "Name of database to create in Redshift cluster. If left blank, uses app name."
-  default     = ""
-}

@@ -15,11 +15,19 @@ output "secrets" {
   value = [
     {
       name  = "REDSHIFT_PASSWORD"
-      value = random_password.this.result
+      value = local.password
     },
     {
       name  = "REDSHIFT_URL"
-      value = "postgres://${urlencode(local.username)}:${urlencode(random_password.this.result)}@${local.db_endpoint}/${urlencode(local.database_name)}"
+      value = "postgres://${urlencode(local.username)}:${urlencode(local.password)}@${local.db_endpoint}/${urlencode(local.database_name)}"
     }
   ]
+}
+
+data "aws_secretsmanager_secret_version" "password" {
+  secret_id = local.password_secret_name
+}
+
+locals {
+  password = jsondecode(data.aws_secretsmanager_secret_version.password.secret_string)["password"]
 }
