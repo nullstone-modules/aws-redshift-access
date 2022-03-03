@@ -19,7 +19,7 @@ output "secrets" {
     },
     {
       name  = "REDSHIFT_URL"
-      value = "redshift://${urlencode(local.username)}:${urlencode(local.password)}@${local.db_endpoint}/${urlencode(local.database_name)}"
+      value = "redshift://${urlencode(local.username)}:${local.password}@${local.db_endpoint}/${urlencode(local.database_name)}"
     }
   ]
 }
