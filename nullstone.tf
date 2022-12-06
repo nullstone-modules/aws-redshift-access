@@ -12,7 +12,7 @@ resource "random_string" "resource_suffix" {
   length  = 5
   lower   = true
   upper   = false
-  number  = false
+  numeric = false
   special = false
 }
 
@@ -23,6 +23,7 @@ locals {
 data "ns_connection" "redshift" {
   name = "redshift"
   type = "redshift/aws"
+  contract = "datastore/aws/redshift"
 }
 
 locals {
